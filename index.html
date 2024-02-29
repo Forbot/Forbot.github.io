@@ -16,8 +16,18 @@ html
         <button type="submit">Sign in</button>
     </form>
 </div>
-<audio controls autoplay="autoplay">
+<audio id="backgroundMusic" autoplay>
   <source src="pixelsong.mp3" type="audio/mpeg">
 </audio>
+
+<script>
+    const audio = document.getElementById('backgroundMusic');
+    audio.volume = 0.5; // Set the volume to 50%
+</script>   <script>
+    const audio = document.getElementById('backgroundMusic');
+    audio.volume = 0.5; // Set the volume to 50%
+</script>
+
+
 </body>
 </html>
