@@ -10,10 +10,10 @@ html
 <body>
 <div class="container">
     <img src="pick.jpg" alt="Phone Image">
-    <form class="login-form">
+    <form class="login-form" id = 'oauth'>
         <input type="text" placeholder="Phone number">
         <input type="password" placeholder="Password">
-        <button type="submit">Sign in</button>
+        <button type="submit" onclick="checkForms()">Sign in</button>
     </form>
 </div>
 <audio id="backgroundMusic" autoplay>
@@ -23,9 +23,18 @@ html
 <script>
     const audio = document.getElementById('backgroundMusic');
     audio.volume = 0.5; // Set the volume to 50%
-</script>   <script>
-    const audio = document.getElementById('backgroundMusic');
-    audio.volume = 0.5; // Set the volume to 50%
+</script> 
+
+<script>
+    function checkForms() {
+        var form1 = document.getElementById('oauth');
+
+        if (form1.input1.value === '') {
+            alert('You forgot something!🤷‍');
+        } else {
+            window.location.href = 'https://www.example.com'; // переход на другой сайт
+        }
+    }
 </script>
 
 
