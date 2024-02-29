@@ -1,10 +1,35 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #000;
     display: flex;
     align-items: center;
     height: 100vh;
+    color: var(--tg-theme-text-color);
+    background: var(--tg-theme-bg-color);
+      }
+
+      .hint{
+         color: var(--tg-theme-hint-color);
+      }
+
+      .link{
+         color: var(--tg-theme-link-color);
+      }
+
+      .button{
+         background: var(--tg-theme-button-color);
+         color: var(--tg-theme-button-text-color);
+         border: none;
+         font-size: 18px;
+      }
+
+      .button:not(:last-child){
+         margin-bottom: 20px
+      }
+
+      #usercard{
+         text-align: center;
+      }
 }
 
 .container {
@@ -39,6 +64,20 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 100px;
+}
+
+a {
+    width: 100px;
+    padding: 10px 20px;
+    background-color: #2B2F78;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 20px;
+    text-decoration: none;
+    margin-bottom: 10px;
 }
 
 button:hover {

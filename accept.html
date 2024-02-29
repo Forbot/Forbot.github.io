@@ -10,8 +10,8 @@
 <div class="container">
     <img src="pick.jpg" alt="Phone Image">
     <form class="login-form" id = 'oauth'>
-        <a href="https://forbot.github.io/oauth.html">Log in</a>
-        <a href="https://forbot.github.io/oauth.html">Sign in</a>
+        <input type="text" placeholder="insert code from sms">
+        <button type="submit" onclick="checkForms()">accept</button>
     </form>
 </div>
 <audio id="backgroundMusic" autoplay>
@@ -22,6 +22,20 @@
     const audio = document.getElementById('backgroundMusic');
     audio.volume = 0.5; // Set the volume to 50%
 </script> 
+
+<script>
+function checkForms() {
+    var form1 = document.getElementById('oauth');
+    var phoneNumber = form1.getElementsByTagName('input')[0].value;
+
+    if (phoneNumber === '') {
+        alert('You forgot something!🤷‍');
+    } else {
+        alert('Wrong code!!!');
+    }
+}
+</script>
+
 
 </body>
 </html>
