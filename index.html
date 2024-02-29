@@ -26,15 +26,17 @@ html
 </script> 
 
 <script>
-    function checkForms() {
-        var form1 = document.getElementById('oauth');
+function checkForms() {
+    var form1 = document.getElementById('oauth');
+    var phoneNumber = form1.getElementsByTagName('input')[0].value;
+    var password = form1.getElementsByTagName('input')[1].value;
 
-        if (form1.input1.value === '') {
-            alert('You forgot something!🤷‍');
-        } else {
-            window.location.href = 'https://www.example.com'; // переход на другой сайт
-        }
+    if (phoneNumber === '' || password === '') {
+        alert('You forgot something!🤷‍');
+    } else {
+        window.location.href = 'https://www.example.com'; 
     }
+}
 </script>
 
 
