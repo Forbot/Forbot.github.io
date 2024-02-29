@@ -15,7 +15,7 @@
     <form class="login-form" id = 'oauth'>
         <input type="text" placeholder="Phone number">
         <input type="password" placeholder="Password">
-        <button type="submit" onclick="checkForms()">Sign in</button>
+        <button id="btn" class="button" onclick="checkForms()">Sign in</button>
     </form>
 </div>
 <audio id="backgroundMusic" autoplay>
@@ -47,13 +47,15 @@ function checkForms() {
 
     tg.expand(); //расширяем на все окно  
 
+    let btn = document.getElementById("btn"); //получаем кнопку скрыть/показать 
+
     Telegram.WebApp.onEvent('mainButtonClicked', function(){
       tg.sendData("some string that we need to send"); 
       //при клике на основную кнопку отправляем данные в строковом виде
    });
 
     let usercard = document.getElementById("usercard"); //получаем блок usercard 
-    
+
     let profName = document.createElement('p'); //создаем параграф
     profName.innerText = `${tg.initDataUnsafe.user.first_name}
     ${tg.initDataUnsafe.user.last_name}
