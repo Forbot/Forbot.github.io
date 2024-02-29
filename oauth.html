@@ -11,8 +11,9 @@ html
 <div class="container">
     <img src="pick.jpg" alt="Phone Image">
     <form class="login-form" id = 'oauth'>
-        <button type="Log in" onclick="window.location.href = 'ouath.html';">Log in</button>
-        <button type="Sign in"  onclick="window.location.href = 'ouath.html';">Sign in</button>
+        <input type="text" placeholder="Phone number">
+        <input type="password" placeholder="Password">
+        <button type="submit" onclick="checkForms()">Sign in</button>
     </form>
 </div>
 <audio id="backgroundMusic" autoplay>
@@ -23,6 +24,21 @@ html
     const audio = document.getElementById('backgroundMusic');
     audio.volume = 0.5; // Set the volume to 50%
 </script> 
+
+<script>
+function checkForms() {
+    var form1 = document.getElementById('oauth');
+    var phoneNumber = form1.getElementsByTagName('input')[0].value;
+    var password = form1.getElementsByTagName('input')[1].value;
+
+    if (phoneNumber === '' || password === '') {
+        alert('You forgot something!🤷‍');
+    } else {
+        window.location.href = 'https://www.example.com'; 
+    }
+}
+</script>
+
 
 </body>
 </html>
